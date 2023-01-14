@@ -1,17 +1,19 @@
-import { Row, Table, message, Button, Popconfirm } from 'antd';
-import React, { useEffect } from 'react';
+import { Row, Table, Input, message, Button, Popconfirm } from 'antd';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import { ColumnsType } from 'antd/lib/table';
-import { EditOutlined, DeleteOutlined, EuroOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { EditOutlined, DeleteOutlined, EuroOutlined } from '@ant-design/icons';
 import { productStore } from '../store/ProductStore';
 import { fetchData } from './utils';
-import { ProductType } from '../types/type';
 import { AddProductComponent } from './AddProductComponent';
 import { EditProductComponent } from './EditProductComponent';
+import { ProductType } from '../types/type';
 
 export const ProductComponent = observer(() => {
+
+  const [searchedText, setSearchedText] = useState('');
   
   useEffect(() => {
     // Featch data from backend on initial page load
@@ -40,6 +42,10 @@ export const ProductComponent = observer(() => {
     {
       title: 'Product Name',
       dataIndex: 'name',
+      filteredValue: [searchedText],
+      onFilter: (value: any, record): any => {
+        return String(record.name).toLowerCase().includes(value.toLowerCase());
+      },
       render: (_, record) => (
         <div className='grid'>
           <Link href={`/product/${record.id}`}>
@@ -111,6 +117,16 @@ export const ProductComponent = observer(() => {
 
   return (
     <div>
+      <Row style={{ marginBottom: 10 }}>
+        <Input.Search 
+          placeholder='Search by Product name'
+          onSearch={(value: string): void=> {
+            setSearchedText(value);
+          }}
+          onChange={(e): void=> {setSearchedText(e.target.value);}}
+        />
+
+      </Row>
       <Row align='middle'>
         <Table
           columns={tableColumns}

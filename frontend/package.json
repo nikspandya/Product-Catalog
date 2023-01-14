@@ -11,6 +11,12 @@
     "lint:fix": "yarn prettier --write . && eslint . --ext .tsx --ext .ts --fix"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^4.22.4",
+    "axios": "^0.27.2",
+    "mobx": "^6.6.1",
+    "mobx-react": "^7.5.2",
+    "mobx-react-lite": "^3.4.0",
     "next": "^12.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

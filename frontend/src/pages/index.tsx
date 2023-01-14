@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
 import React from 'react';
+import { ProductComponent } from '../components/ProductComponent';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <h1>Hello World From Niks</h1>
+      <ProductComponent />
     </div>
   );
 };

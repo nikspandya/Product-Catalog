@@ -7,6 +7,8 @@ import { EditOutlined, DeleteOutlined, EuroOutlined } from '@ant-design/icons';
 import { productStore } from '../store/ProductStore';
 import { fetchData } from './utils';
 import { ProductType } from '../types/type';
+import { AddProductComponent } from './AddProductComponent';
+import { EditProductComponent } from './EditProductComponent';
 
 export const ProductComponent = observer(() => {
   
@@ -30,6 +32,7 @@ export const ProductComponent = observer(() => {
 
   const handleEdit = (record: ProductType): void => {
     productStore.setProductDetails(record);
+    productStore.setIsProductBeingEdited(true);
   };
 
   const tableColumns: ColumnsType<ProductType> = [
@@ -105,6 +108,10 @@ export const ProductComponent = observer(() => {
           }}
         />
       </Row>
+      <Row justify='end' style={{ marginTop: 10 }}>
+        <AddProductComponent />
+      </Row>
+      {productStore.isProductBeingEdited ? <EditProductComponent /> : ''}
     </div>
   );
 });

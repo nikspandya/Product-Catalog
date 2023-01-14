@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import { ColumnsType } from 'antd/lib/table';
 import { EditOutlined, DeleteOutlined, EuroOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 import { productStore } from '../store/ProductStore';
 import { fetchData } from './utils';
 import { ProductType } from '../types/type';
@@ -39,6 +40,18 @@ export const ProductComponent = observer(() => {
     {
       title: 'Product Name',
       dataIndex: 'name',
+      render: (_, record) => (
+        <div className='grid'>
+          <Link href={`/product/${record.id}`}>
+            <a
+              href={`/product/${record.id}`} 
+              onClick={(): void => productStore.setProductDetails(record)}
+            >
+              {record.name}
+            </a>
+          </Link>
+        </div>
+      ),
     },
     {
       title: 'Product Price',

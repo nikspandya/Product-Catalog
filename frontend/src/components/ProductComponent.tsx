@@ -6,7 +6,7 @@ import { ColumnsType } from 'antd/lib/table';
 import Link from 'next/link';
 import { EditOutlined, DeleteOutlined, EuroOutlined } from '@ant-design/icons';
 import { productStore } from '../store/ProductStore';
-import { fetchData } from './utils';
+import { fetchData, getDiscountPrice, SERVER_URL } from './utils';
 import { AddProductComponent } from './AddProductComponent';
 import { EditProductComponent } from './EditProductComponent';
 import { ProductType } from '../types/type';
@@ -21,7 +21,7 @@ export const ProductComponent = observer(() => {
   }, []);
 
   const handleDelete = (record: ProductType): void => {
-    axios.delete(`http://localhost:8000/api/product/${record.id}/`)
+    axios.delete(`${SERVER_URL}${record.id}/`)
       .then(function (response) {
         console.log(response);
         message.success(`Product '${record.name}' deleted successfully`);
@@ -60,7 +60,7 @@ export const ProductComponent = observer(() => {
       ),
     },
     {
-      title: 'Product Price',
+      title: 'Original Price',
       dataIndex: 'price',
       render: (_, record) => (
         <div>
@@ -69,12 +69,24 @@ export const ProductComponent = observer(() => {
             {' '}
             <EuroOutlined />
           </p>
-        
         </div>
       ),
     },
     {
-      title: 'Product Status',
+      title: 'Current Price',
+      dataIndex: 'price',
+      render: (_, record) => (
+        <div>
+          <p>
+            {getDiscountPrice(record.price)}
+            {' '}
+            <EuroOutlined />
+          </p>
+        </div>
+      ),
+    },
+    {
+      title: 'Status',
       render: (_, record) => (
         <div>
           {record.active ? <p>Active</p> : <p>Not Active</p>}

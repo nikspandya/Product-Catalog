@@ -2,7 +2,10 @@ import { Col, Row, Card, Divider, Image, Button } from 'antd';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import { getDiscountPrice } from '../../../components/utils';
 import { productStore } from '../../../store/ProductStore';
+
+const DIVIDER_MARGIN = 10;
 
 const Product: NextPage = () => {
   return (
@@ -24,7 +27,7 @@ const Product: NextPage = () => {
           </Col>
         </Row>
         <Divider
-          style={{ marginTop: 20, marginBottom: 20 }}
+          style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
           <Col span={8}>
@@ -35,18 +38,29 @@ const Product: NextPage = () => {
           </Col>
         </Row>
         <Divider
-          style={{ marginTop: 20, marginBottom: 20 }}
+          style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
           <Col span={8}>
-            Price:
+            Original Price:
           </Col>
           <Col span={15}>
             {productStore.productDetails.price}
           </Col>
         </Row>
         <Divider
-          style={{ marginTop: 20, marginBottom: 20 }}
+          style={{ marginTop: DIVIDER_MARGIN }}
+        />
+        <Row>
+          <Col span={8}>
+            Current Price:
+          </Col>
+          <Col span={15}>
+            {getDiscountPrice(productStore.productDetails.price)}
+          </Col>
+        </Row>
+        <Divider
+          style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
           <Col span={8}>
@@ -57,7 +71,7 @@ const Product: NextPage = () => {
           </Col>
         </Row>
         <Divider
-          style={{ marginTop: 20, marginBottom: 20 }}
+          style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
           <Col span={8}>

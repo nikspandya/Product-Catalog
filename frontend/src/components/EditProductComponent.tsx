@@ -3,7 +3,7 @@ import axios from 'axios';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { productStore } from '../store/ProductStore';
-import { fetchData } from './utils';
+import { fetchData, SERVER_URL } from './utils';
 
 export const EditProductComponent = observer(() => {
 
@@ -16,7 +16,7 @@ export const EditProductComponent = observer(() => {
   const onFinish = (productInfo: any): void => {
     const productId = productStore.productDetails.id;
     console.log(productId);
-    axios.put(`http://localhost:8000/api/product/${productId}/`, {
+    axios.put(`${SERVER_URL}${productId}/`, {
       name: productInfo.productName,
       description: productInfo.description,
       price: productInfo.price,
@@ -25,7 +25,7 @@ export const EditProductComponent = observer(() => {
     })
       .then(function (response) {
         console.log(response);
-        message.success(`New product '${productInfo.productName}' updated successfully`);
+        message.success(`Product '${productInfo.productName}' updated successfully`);
         form.resetFields();
         productStore.setIsProductBeingEdited(false);
         fetchData();

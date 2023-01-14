@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input, message, Modal } from 'antd';
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
-import { fetchData } from './utils';
+import { fetchData, SERVER_URL } from './utils';
 
 export const AddProductComponent = observer(() => {
 
@@ -19,7 +19,7 @@ export const AddProductComponent = observer(() => {
 
   const onFinish = (productInfo: any): void => {
 
-    axios.post('http://localhost:8000/api/product/', {
+    axios.post(SERVER_URL, {
       name: productInfo.productName,
       description: productInfo.description,
       price: productInfo.price,
@@ -46,7 +46,7 @@ export const AddProductComponent = observer(() => {
 
   return (
     <div>
-      <Button onClick={showModal} style={{ color: 'blue' }}>
+      <Button onClick={showModal} style={{ color: 'green' }}>
         Add New Product
       </Button>
       <Modal

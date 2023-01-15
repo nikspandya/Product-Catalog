@@ -65,7 +65,7 @@ yarn dev
 
 - User can sort products by name, price and active status
 
-- user can filter/search products by product name
+- User can filter/search products by product name
 
 Note: All products price are reduce by 10% disccount if the time of the day is between 10:00 to 15:00
 

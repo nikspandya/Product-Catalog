@@ -6,7 +6,6 @@ import { productStore } from '../store/ProductStore';
 import { fetchData, SERVER_URL } from './utils';
 
 export const EditProductComponent = observer(() => {
-
   const [form] = Form.useForm();
 
   const handleCancel = (): void => {
@@ -16,16 +15,19 @@ export const EditProductComponent = observer(() => {
   const onFinish = (productInfo: any): void => {
     const productId = productStore.productDetails.id;
     console.log(productId);
-    axios.put(`${SERVER_URL}${productId}/`, {
-      name: productInfo.productName,
-      description: productInfo.description,
-      price: productInfo.price,
-      picture: productInfo.picture,
-      active: productInfo.active,
-    })
+    axios
+      .put(`${SERVER_URL}${productId}/`, {
+        name: productInfo.productName,
+        description: productInfo.description,
+        price: productInfo.price,
+        picture: productInfo.picture,
+        active: productInfo.active,
+      })
       .then(function (response) {
         console.log(response);
-        message.success(`Product '${productInfo.productName}' updated successfully`);
+        message.success(
+          `Product '${productInfo.productName}' updated successfully`,
+        );
         form.resetFields();
         productStore.setIsProductBeingEdited(false);
         fetchData();
@@ -96,10 +98,15 @@ export const EditProductComponent = observer(() => {
             <Input maxLength={100} />
           </Form.Item>
 
-          <Form.Item name="active" initialValue={productStore.productDetails.active} valuePropName="checked" wrapperCol={{ offset: 6, span: 10 }}>
+          <Form.Item
+            name='active'
+            initialValue={productStore.productDetails.active}
+            valuePropName='checked'
+            wrapperCol={{ offset: 6, span: 10 }}
+          >
             <Checkbox>Active</Checkbox>
           </Form.Item>
-          
+
           <Form.Item wrapperCol={{ offset: 6 }}>
             <Button type='primary' htmlType='submit'>
               Update Product

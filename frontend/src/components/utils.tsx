@@ -4,11 +4,11 @@ import { productStore } from '../store/ProductStore';
 export const getDiscountPrice = (price: number): number => {
   // Appply 10% discount to price when time is between 10 to 15
   const today = new Date();
-  const currenTime = today.getHours(); 
+  const currenTime = today.getHours();
   let dicountPrice = price;
-  
+
   if (currenTime >= 10 && currenTime <= 14) {
-    dicountPrice = price - ((price * 10) / 100);
+    dicountPrice = price - (price * 10) / 100;
   } else {
     dicountPrice = price;
   }

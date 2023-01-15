@@ -5,7 +5,6 @@ import axios from 'axios';
 import { fetchData, SERVER_URL } from './utils';
 
 export const AddProductComponent = observer(() => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
 
@@ -19,17 +18,19 @@ export const AddProductComponent = observer(() => {
   };
 
   const onFinish = (productInfo: any): void => {
-
-    axios.post(SERVER_URL, {
-      name: productInfo.productName,
-      description: productInfo.description,
-      price: productInfo.price,
-      picture: productInfo.picture,
-      active: productInfo.active,
-    })
+    axios
+      .post(SERVER_URL, {
+        name: productInfo.productName,
+        description: productInfo.description,
+        price: productInfo.price,
+        picture: productInfo.picture,
+        active: productInfo.active,
+      })
       .then(function (response) {
         console.log(response);
-        message.success(`New product '${productInfo.productName}' added successfully`);
+        message.success(
+          `New product '${productInfo.productName}' added successfully`,
+        );
         form.resetFields();
         setIsModalOpen(false);
         fetchData();
@@ -51,7 +52,10 @@ export const AddProductComponent = observer(() => {
 
   return (
     <div>
-      <Button onClick={showModal} style={{ background: '#8FBC8F', color: 'black' }}>
+      <Button
+        onClick={showModal}
+        style={{ background: '#8FBC8F', color: 'black' }}
+      >
         Add New Product
       </Button>
       <Modal
@@ -96,14 +100,16 @@ export const AddProductComponent = observer(() => {
             <Input type='number' maxLength={25} />
           </Form.Item>
 
-          <Form.Item
-            label='Picture Url'
-            name='picture'
-          >
+          <Form.Item label='Picture Url' name='picture'>
             <Input maxLength={100} />
           </Form.Item>
 
-          <Form.Item name="active" initialValue={false} valuePropName="checked" wrapperCol={{ offset: 6, span: 10 }}>
+          <Form.Item
+            name='active'
+            initialValue={false}
+            valuePropName='checked'
+            wrapperCol={{ offset: 6, span: 10 }}
+          >
             <Checkbox>Active</Checkbox>
           </Form.Item>
 

@@ -4,7 +4,11 @@ import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import { ColumnsType } from 'antd/lib/table';
 import Link from 'next/link';
-import { EditOutlined, DeleteOutlined, EuroCircleOutlined } from '@ant-design/icons';
+import {
+  EditOutlined,
+  DeleteOutlined,
+  EuroCircleOutlined,
+} from '@ant-design/icons';
 import { productStore } from '../store/ProductStore';
 import { fetchData, getDiscountPrice, SERVER_URL } from './utils';
 import { AddProductComponent } from './AddProductComponent';
@@ -12,16 +16,16 @@ import { EditProductComponent } from './EditProductComponent';
 import { ProductType } from '../types/type';
 
 export const ProductComponent = observer(() => {
-
   const [searchedText, setSearchedText] = useState('');
-  
+
   useEffect(() => {
     // Featch data from backend on initial page load
     fetchData();
   }, []);
 
   const handleDelete = (record: ProductType): void => {
-    axios.delete(`${SERVER_URL}${record.id}/`)
+    axios
+      .delete(`${SERVER_URL}${record.id}/`)
       .then(function (response) {
         console.log(response);
         message.success(`Product '${record.name}' deleted successfully`);
@@ -51,7 +55,7 @@ export const ProductComponent = observer(() => {
         <div className='grid'>
           <Link href={`/product/${record.id}`}>
             <a
-              href={`/product/${record.id}`} 
+              href={`/product/${record.id}`}
               onClick={(): void => productStore.setProductDetails(record)}
             >
               {record.name}
@@ -70,7 +74,7 @@ export const ProductComponent = observer(() => {
       render: (_, record) => (
         <div>
           <p>
-            {record.price}
+            {record.price} 
             {' '}
             <EuroCircleOutlined />
           </p>
@@ -87,7 +91,7 @@ export const ProductComponent = observer(() => {
       render: (_, record) => (
         <div>
           <p>
-            {getDiscountPrice(record.price)}
+            {getDiscountPrice(record.price)} 
             {' '}
             <EuroCircleOutlined />
           </p>
@@ -99,9 +103,7 @@ export const ProductComponent = observer(() => {
       dataIndex: 'active',
       sorter: (a, b) => Number(a.active) - Number(b.active),
       render: (_, record) => (
-        <div>
-          {record.active ? <p>Active</p> : <p>Not Active</p>}
-        </div>
+        <div>{record.active ? <p>Active</p> : <p>Not Active</p>}</div>
       ),
     },
     {
@@ -123,7 +125,7 @@ export const ProductComponent = observer(() => {
                 <strong>{record.name}</strong>
                 &quot;
               </p>
-          )}
+            )}
             onConfirm={(): void => handleDelete(record)}
             okText='Yes'
             cancelText='No'
@@ -143,12 +145,14 @@ export const ProductComponent = observer(() => {
     <div>
       <Row style={{ marginBottom: 10 }}>
         <Col span={16}>
-          <Input.Search 
+          <Input.Search
             placeholder='Search by Product name'
-            onSearch={(value: string): void=> {
+            onSearch={(value: string): void => {
               setSearchedText(value);
             }}
-            onChange={(e): void=> {setSearchedText(e.target.value);}}
+            onChange={(e): void => {
+              setSearchedText(e.target.value);
+            }}
           />
         </Col>
         <Col span={6} push={2}>
@@ -161,7 +165,9 @@ export const ProductComponent = observer(() => {
           dataSource={productStore.products}
           pagination={false}
           locale={{
-            emptyText: <p> There is No Products to show</p>,
+            emptyText: (
+              <p style={{ color: 'gray' }}> There is No Products to show</p>
+            ),
           }}
         />
       </Row>

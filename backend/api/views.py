@@ -10,7 +10,7 @@ class ProductList(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
 
-    filterset_fields = ['name', 'active']
+    filterset_fields = ["name", "active"]
 
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):

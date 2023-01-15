@@ -63,4 +63,10 @@ yarn dev
 
 - User can click on the product name to go to the product detail page
 
+- User can sort products by name, price and active status
+
+- user can filter/search products by product name
+
+Note: All products price are reduce by 10% disccount if the time of the day is between 10:00 to 15:00
+
 ## Enjoy the App

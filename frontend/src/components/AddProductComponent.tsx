@@ -89,7 +89,7 @@ export const AddProductComponent = observer(() => {
               { required: true, message: 'Please input product description!' },
             ]}
           >
-            <Input maxLength={300} />
+            <Input.TextArea maxLength={300} />
           </Form.Item>
 
           <Form.Item

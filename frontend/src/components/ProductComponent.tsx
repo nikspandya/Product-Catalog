@@ -42,6 +42,7 @@ export const ProductComponent = observer(() => {
     {
       title: 'Product Name',
       dataIndex: 'name',
+      sorter: (a, b) => a.name.localeCompare(b.name),
       filteredValue: [searchedText],
       onFilter: (value: any, record): any => {
         return String(record.name).toLowerCase().includes(value.toLowerCase());
@@ -62,6 +63,10 @@ export const ProductComponent = observer(() => {
     {
       title: 'Original Price',
       dataIndex: 'price',
+      sorter: {
+        compare: (a, b) => a.price - b.price,
+        multiple: 3,
+      },
       render: (_, record) => (
         <div>
           <p>
@@ -75,6 +80,10 @@ export const ProductComponent = observer(() => {
     {
       title: 'Current Price',
       dataIndex: 'price',
+      sorter: {
+        compare: (a, b) => a.price - b.price,
+        multiple: 3,
+      },
       render: (_, record) => (
         <div>
           <p>
@@ -87,6 +96,8 @@ export const ProductComponent = observer(() => {
     },
     {
       title: 'Status',
+      dataIndex: 'active',
+      sorter: (a, b) => Number(a.active) - Number(b.active),
       render: (_, record) => (
         <div>
           {record.active ? <p>Active</p> : <p>Not Active</p>}
@@ -101,7 +112,7 @@ export const ProductComponent = observer(() => {
             type='text'
             icon={<EditOutlined />}
             onClick={(): void => handleEdit(record)}
-            style={{ background: '#F5F5DC', marginRight: 10 }}
+            style={{ background: '#F5F5DC', marginRight: 10, marginLeft: 10 }}
           />
 
           <Popconfirm

@@ -1,10 +1,10 @@
-import { Row, Table, Input, message, Button, Popconfirm } from 'antd';
+import { Row, Table, Input, message, Button, Popconfirm, Col } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import { ColumnsType } from 'antd/lib/table';
 import Link from 'next/link';
-import { EditOutlined, DeleteOutlined, EuroOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, EuroCircleOutlined } from '@ant-design/icons';
 import { productStore } from '../store/ProductStore';
 import { fetchData, getDiscountPrice, SERVER_URL } from './utils';
 import { AddProductComponent } from './AddProductComponent';
@@ -67,7 +67,7 @@ export const ProductComponent = observer(() => {
           <p>
             {record.price}
             {' '}
-            <EuroOutlined />
+            <EuroCircleOutlined />
           </p>
         </div>
       ),
@@ -80,7 +80,7 @@ export const ProductComponent = observer(() => {
           <p>
             {getDiscountPrice(record.price)}
             {' '}
-            <EuroOutlined />
+            <EuroCircleOutlined />
           </p>
         </div>
       ),
@@ -101,6 +101,7 @@ export const ProductComponent = observer(() => {
             type='text'
             icon={<EditOutlined />}
             onClick={(): void => handleEdit(record)}
+            style={{ background: '#F5F5DC', marginRight: 10 }}
           />
 
           <Popconfirm
@@ -130,14 +131,18 @@ export const ProductComponent = observer(() => {
   return (
     <div>
       <Row style={{ marginBottom: 10 }}>
-        <Input.Search 
-          placeholder='Search by Product name'
-          onSearch={(value: string): void=> {
-            setSearchedText(value);
-          }}
-          onChange={(e): void=> {setSearchedText(e.target.value);}}
-        />
-
+        <Col span={16}>
+          <Input.Search 
+            placeholder='Search by Product name'
+            onSearch={(value: string): void=> {
+              setSearchedText(value);
+            }}
+            onChange={(e): void=> {setSearchedText(e.target.value);}}
+          />
+        </Col>
+        <Col span={6} push={2}>
+          <AddProductComponent />
+        </Col>
       </Row>
       <Row align='middle'>
         <Table
@@ -148,9 +153,6 @@ export const ProductComponent = observer(() => {
             emptyText: <p> There is No Products to show</p>,
           }}
         />
-      </Row>
-      <Row justify='end' style={{ marginTop: 10 }}>
-        <AddProductComponent />
       </Row>
       {productStore.isProductBeingEdited ? <EditProductComponent /> : ''}
     </div>

@@ -15,6 +15,7 @@ export const AddProductComponent = observer(() => {
 
   const handleCancel = (): void => {
     setIsModalOpen(false);
+    form.resetFields();
   };
 
   const onFinish = (productInfo: any): void => {
@@ -34,8 +35,12 @@ export const AddProductComponent = observer(() => {
         fetchData();
       })
       .catch(function (error) {
-        console.log(error);
-        message.error('falied to add New product');
+        const errorResponse = error.response.data.name[0];
+        if (errorResponse !== '') {
+          message.error(errorResponse);
+        } else {
+          message.error('falied to add New product');
+        }
       });
   };
 
@@ -46,7 +51,7 @@ export const AddProductComponent = observer(() => {
 
   return (
     <div>
-      <Button onClick={showModal} style={{ color: 'green' }}>
+      <Button onClick={showModal} style={{ background: '#8FBC8F', color: 'black' }}>
         Add New Product
       </Button>
       <Modal

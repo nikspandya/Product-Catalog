@@ -13,13 +13,13 @@ const Product: NextPage = () => {
       <Row justify='end' style={{ marginBottom: 10 }}>
         <Col>
           <Link href='/'> 
-            <Button> Back To All Products</Button>
+            <Button style={{ background: '#BDB76B', color: 'black' }}> Back To All Products</Button>
           </Link>
         </Col>
       </Row>
-      <Card title="Product Info" style={{ width: 600 }}>
+      <Card title="Product Info:" style={{ width: 600, background: '#8FBC8F' }}>
         <Row>
-          <Col span={8}>
+          <Col span={8} style={{ fontWeight: 'bold' }}>
             Name:
           </Col>
           <Col span={15}>
@@ -30,7 +30,7 @@ const Product: NextPage = () => {
           style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
-          <Col span={8}>
+          <Col span={8} style={{ fontWeight: 'bold' }}>
             Description:
           </Col>
           <Col span={15}>
@@ -41,7 +41,7 @@ const Product: NextPage = () => {
           style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
-          <Col span={8}>
+          <Col span={8} style={{ fontWeight: 'bold' }}>
             Original Price:
           </Col>
           <Col span={15}>
@@ -52,7 +52,7 @@ const Product: NextPage = () => {
           style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
-          <Col span={8}>
+          <Col span={8} style={{ fontWeight: 'bold' }}>
             Current Price:
           </Col>
           <Col span={15}>
@@ -63,7 +63,7 @@ const Product: NextPage = () => {
           style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
-          <Col span={8}>
+          <Col span={8} style={{ fontWeight: 'bold' }}>
             Status:
           </Col>
           <Col span={15}>
@@ -74,7 +74,7 @@ const Product: NextPage = () => {
           style={{ marginTop: DIVIDER_MARGIN }}
         />
         <Row>
-          <Col span={8}>
+          <Col span={8} style={{ fontWeight: 'bold' }}>
             Picture:
           </Col>
           <Col span={15}>

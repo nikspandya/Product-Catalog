@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    container_name: backend
+    build:
+      dockerfile: Dockerfile
+      context: "./backend"
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+
+  frontend:
+    container_name: frontend
+    build:
+      context: "./frontend"
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    stdin_open: true
